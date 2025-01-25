@@ -410,6 +410,7 @@ Be kind to yourselves. This is a hard process. Many of us are doing something li
 Helpful overview of the commonly used commands. Have fun !!!
 
 # Setting Permissions for Shiny Applications and Virtual Environments
+
 # Set ownership for Shiny app files
 sudo chown -R shiny:shiny /path/to/shiny-app
 
@@ -421,6 +422,7 @@ sudo systemctl restart shiny-server
 
 # Set permissions for the virtual environment
 sudo chown -R shiny:shiny /path/to/shiny_env
+
 sudo chmod -R 755 /path/to/shiny_env
 
 # Checking Permissions and Testing Access as Shiny User
@@ -429,11 +431,14 @@ sudo -u shiny -s
 
 # List critical files to verify access
 ls -l /path/to/shiny-app/app.R
+
 ls -l /path/to/shiny_env/bin/python
 
 # Load libraries in R (as `shiny` user)
 sudo R
+
 library(reticulate)
+
 use_python("/path/to/shiny_env/bin/python", required = TRUE)
 
 # Moving the Virtual Environment
@@ -442,6 +447,7 @@ sudo mv /original/path/to/shiny_env /new/path/to/shiny_env
 
 # Update permissions for the new location
 sudo chown -R shiny:shiny /new/path/to/shiny_env
+
 sudo chmod -R 755 /new/path/to/shiny_env
 
 # Update app.R to reflect the new path
@@ -456,17 +462,22 @@ sudo -u shiny python3 -m venv /path/to/new_env
 
 # Activate and install required packages
 source /path/to/new_env/bin/activate
+
 pip install xgboost joblib
+
 deactivate
 
 # Update app.R to use the new environment
+
 # Edit the R script app.R
 nano /path/to/shiny-app/app.R
 # Inside app.R, add or edit the line
 use_python("/path/to/new_env/bin/python", required = TRUE)
 
 # Troubleshooting and Logging
+
 # Log messages in app.R to debug
+
 # Edit the R script app.R
 nano /path/to/shiny-app/app.R
 # Inside app.R, add these lines to create a log for debugging
